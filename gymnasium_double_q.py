@@ -4,8 +4,8 @@ import numpy as np
 import os
 import random # To randomly choose which Q-table to update
 
-# env is frozenlake
-env = gym.make("FrozenLake-v1", render_mode="rgb_array")
+# env is frozenlake (deterministic version)
+env = gym.make("FrozenLake-v1", render_mode="rgb_array", is_slippery=False)
 
 # Double Q-learning parameters (using previously tuned values)
 num_episodes = 100000
@@ -25,7 +25,7 @@ rewards_per_episode = np.zeros(num_episodes)
 average_rewards_log = []
 
 # Create output directory if it doesn't exist
-output_dir = "output/double_q" # Changed directory name
+output_dir = "output/double_q_deterministic" # Changed directory name
 os.makedirs(output_dir, exist_ok=True)
 
 # --- Plotting Setup for Learning Curve ---
@@ -117,7 +117,7 @@ for episode in range(num_episodes):
         fig_lc.canvas.flush_events()
 
         if (episode + 1) % 1000 == 0:
-            plot_filename = os.path.join(output_dir, f"double_q_learning_curve_ep{episode + 1}.png") # Changed filename
+            plot_filename = os.path.join(output_dir, f"double_q_deterministic_curve_ep{episode + 1}.png") # Changed filename
             try:
                 fig_lc.savefig(plot_filename)
                 print(f"Saved learning curve plot to {plot_filename}")
@@ -131,13 +131,13 @@ for episode in range(num_episodes):
 env.close()
 plt.ioff()
 
-print("Double Q-Learning Training finished.") # Changed message
+print("Double Q-Learning (Deterministic) Training finished.") # Changed message
 
 # Save the final learning curve plot
-final_plot_filename = os.path.join(output_dir, "double_q_learning_curve_final.png") # Changed filename
+final_plot_filename = os.path.join(output_dir, "double_q_deterministic_curve_final.png") # Changed filename
 try:
     fig_lc.savefig(final_plot_filename)
-    print(f"Saved final Double Q-Learning curve plot to {final_plot_filename}") # Changed message
+    print(f"Saved final Double Q-Learning (Deterministic) curve plot to {final_plot_filename}") # Changed message
 except Exception as e:
     print(f"Error saving final plot: {e}")
 
