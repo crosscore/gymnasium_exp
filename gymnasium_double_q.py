@@ -8,7 +8,7 @@ import random # To randomly choose which Q-table to update
 env = gym.make("FrozenLake-v1", render_mode="rgb_array", is_slippery=False)
 
 # Double Q-learning parameters (using previously tuned values)
-num_episodes = 100000
+num_episodes = 60000
 learning_rate = 0.01
 discount_factor = 0.95
 epsilon = 1.0

@@ -8,7 +8,7 @@ env = gym.make("FrozenLake-v1", render_mode="rgb_array", is_slippery=False)
 
 # SARSA parameters (using previously tuned values, adapted for deterministic)
 # For deterministic, learning can be faster, let's reduce episodes but keep other fine-tuned params
-num_episodes = 20000 # Reduced episodes for deterministic
+num_episodes = 60000 # Set episodes to 60000
 learning_rate = 0.05
 discount_factor = 0.99
 epsilon = 1.0
