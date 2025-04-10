@@ -12,7 +12,7 @@ num_episodes = 60000
 learning_rate = 0.1
 discount_factor = 0.99
 epsilon = 1.0
-epsilon_decay_rate = 0.0001 # 指数減衰率として使用
+epsilon_decay_rate = 0.001 # Increase decay rate
 max_epsilon = 1.0
 min_epsilon = 0.0005
 
