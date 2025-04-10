@@ -3,12 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-# env is frozenlake
-env = gym.make("FrozenLake-v1", render_mode="rgb_array")
+# env is frozenlake (deterministic version)
+env = gym.make("FrozenLake-v1", render_mode="rgb_array", is_slippery=False)
 
-# SARSA parameters (same as Q-Learning for comparison, can be tuned)
-num_episodes = 80000 # エピソード数を増やす
-learning_rate = 0.05 # 学習率を下げる
+# SARSA parameters (using previously tuned values, adapted for deterministic)
+# For deterministic, learning can be faster, let's reduce episodes but keep other fine-tuned params
+num_episodes = 20000 # Reduced episodes for deterministic
+learning_rate = 0.05
 discount_factor = 0.99
 epsilon = 1.0
 epsilon_decay_rate = 0.0001 # 指数減衰率として使用
@@ -23,7 +24,7 @@ rewards_per_episode = np.zeros(num_episodes)
 average_rewards_log = [] # 平均報酬のログ
 
 # Create output directory if it doesn't exist
-output_dir = "output/sarsa" # Changed directory name
+output_dir = "output/sarsa_deterministic" # Changed directory name
 os.makedirs(output_dir, exist_ok=True)
 
 # --- Plotting Setup for Learning Curve ---
@@ -113,7 +114,7 @@ for episode in range(num_episodes):
         fig_lc.canvas.flush_events()
 
         if (episode + 1) % 1000 == 0:
-            plot_filename = os.path.join(output_dir, f"sarsa_learning_curve_ep{episode + 1}.png") # Changed filename
+            plot_filename = os.path.join(output_dir, f"sarsa_deterministic_curve_ep{episode + 1}.png") # Changed filename
             try:
                 fig_lc.savefig(plot_filename)
                 print(f"Saved learning curve plot to {plot_filename}")
@@ -127,13 +128,13 @@ for episode in range(num_episodes):
 env.close()
 plt.ioff()
 
-print("SARSA Training finished.") # Changed message
+print("SARSA (Deterministic) Training finished.") # Changed message
 
 # Save the final learning curve plot
-final_plot_filename = os.path.join(output_dir, "sarsa_learning_curve_final.png") # Changed filename
+final_plot_filename = os.path.join(output_dir, "sarsa_deterministic_curve_final.png") # Changed filename
 try:
     fig_lc.savefig(final_plot_filename)
-    print(f"Saved final SARSA learning curve plot to {final_plot_filename}") # Changed message
+    print(f"Saved final SARSA (Deterministic) learning curve plot to {final_plot_filename}") # Changed message
 except Exception as e:
     print(f"Error saving final plot: {e}")
 

@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os # outputフォルダ作成のため追加
 
-# env is frozenlake
-env = gym.make("FrozenLake-v1", render_mode="rgb_array")
+# env is frozenlake (deterministic version)
+env = gym.make("FrozenLake-v1", render_mode="rgb_array", is_slippery=False)
 # state, info = env.reset()
 # print(f"Initial state: {state}")
 # print(f"Initial info: {info}")
@@ -26,7 +26,7 @@ rewards_per_episode = np.zeros(num_episodes)
 average_rewards_log = [] # 平均報酬のログ
 
 # Create output directory if it doesn't exist
-output_dir = "output/q"
+output_dir = "output/q_deterministic" # Changed directory name
 os.makedirs(output_dir, exist_ok=True)
 
 # --- Plotting Setup for Learning Curve ---
@@ -112,7 +112,7 @@ for episode in range(num_episodes):
 
         # Save the plot periodically (e.g., every 1000 episodes)
         if (episode + 1) % 1000 == 0:
-            plot_filename = os.path.join(output_dir, f"learning_curve_ep{episode + 1}.png")
+            plot_filename = os.path.join(output_dir, f"learning_curve_deterministic_ep{episode + 1}.png") # Changed filename
             try:
                 fig_lc.savefig(plot_filename)
                 print(f"Saved learning curve plot to {plot_filename}")
@@ -127,13 +127,13 @@ for episode in range(num_episodes):
 env.close()
 plt.ioff() # Turn off interactive mode
 
-print("Training finished.")
+print("Q-Learning (Deterministic) Training finished.") # Changed message
 
 # Save the final learning curve plot
-final_plot_filename = os.path.join(output_dir, "learning_curve_final.png")
+final_plot_filename = os.path.join(output_dir, "learning_curve_deterministic_final.png") # Changed filename
 try:
     fig_lc.savefig(final_plot_filename)
-    print(f"Saved final learning curve plot to {final_plot_filename}")
+    print(f"Saved final learning curve plot to {final_plot_filename}") # Changed message
 except Exception as e:
     print(f"Error saving final plot: {e}")
 
