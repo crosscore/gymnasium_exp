@@ -22,7 +22,7 @@ def run_script(script_name):
     if not os.path.exists(script_path):
         print(f"Error: Script not found - {script_path}")
         return False
-    
+
     print(f"--- Running {script_name} ---")
     try:
         # Run the script and capture output
@@ -55,8 +55,8 @@ if __name__ == "__main__":
             all_successful = False
             print(f"Stopping execution due to error in {script}.")
             break # Stop if one script fails
-    
+
     if all_successful:
         print("\n=== All scripts executed successfully! ===")
     else:
-        print("\n=== Execution finished with errors. ===") 
+        print("\n=== Execution finished with errors. ===")

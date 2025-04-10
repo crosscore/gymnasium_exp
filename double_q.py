@@ -3,18 +3,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import random # To randomly choose which Q-table to update
+import config # Import shared config
 
 # env is frozenlake (deterministic version)
 env = gym.make("FrozenLake-v1", render_mode="rgb_array", is_slippery=False)
 
-# Double Q-learning parameters (using previously tuned values)
-num_episodes = 60000
-learning_rate = 0.1
-discount_factor = 0.99
-epsilon = 1.0
-epsilon_decay_rate = 0.001 # Increase decay rate for faster convergence
-max_epsilon = 1.0
-min_epsilon = 0.0005
+# Double Q-learning parameters (Load from config)
+num_episodes = config.num_episodes
+learning_rate = config.learning_rate
+discount_factor = config.discount_factor
+epsilon = config.max_epsilon # Start with max epsilon
+epsilon_decay_rate = config.epsilon_decay_rate
+max_epsilon = config.max_epsilon # Needed for decay calculation
+min_epsilon = config.min_epsilon
 
 # Q-table initialization (Two Q-tables)
 q_table_a = np.zeros((env.observation_space.n, env.action_space.n))

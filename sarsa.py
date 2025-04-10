@@ -2,19 +2,19 @@ import gymnasium as gym
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import config # Import shared config
 
 # env is frozenlake (deterministic version)
 env = gym.make("FrozenLake-v1", render_mode="rgb_array", is_slippery=False)
 
-# SARSA parameters (using previously tuned values, adapted for deterministic)
-# For deterministic, learning can be faster, let's reduce episodes but keep other fine-tuned params
-num_episodes = 60000 # Set episodes to 60000
-learning_rate = 0.1 # Set learning rate to 0.1
-discount_factor = 0.99 # Set discount factor to 0.99
-epsilon = 1.0
-epsilon_decay_rate = 0.001 # Increase decay rate
-max_epsilon = 1.0
-min_epsilon = 0.0005
+# SARSA parameters (Load from config)
+num_episodes = config.num_episodes
+learning_rate = config.learning_rate
+discount_factor = config.discount_factor
+epsilon = config.max_epsilon # Start with max epsilon
+epsilon_decay_rate = config.epsilon_decay_rate
+max_epsilon = config.max_epsilon # Needed for decay calculation
+min_epsilon = config.min_epsilon
 
 # Q-table initialization (still using a Q-table)
 q_table = np.zeros((env.observation_space.n, env.action_space.n))
