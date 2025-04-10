@@ -10,13 +10,13 @@ env = gym.make("FrozenLake-v1", render_mode="rgb_array")
 # print(f"Initial info: {info}")
 
 # Q-Learning parameters
-num_episodes = 30000 # ユーザーが変更
+num_episodes = 60000 # ユーザーが変更
 learning_rate = 0.1
 discount_factor = 0.99
 epsilon = 1.0
 epsilon_decay_rate = 0.0001 # 線形減衰率
 max_epsilon = 1.0
-min_epsilon = 0.01
+min_epsilon = 0.0005
 
 # Q-table initialization
 q_table = np.zeros((env.observation_space.n, env.action_space.n))
@@ -26,7 +26,7 @@ rewards_per_episode = np.zeros(num_episodes)
 average_rewards_log = [] # 平均報酬のログ
 
 # Create output directory if it doesn't exist
-output_dir = "output"
+output_dir = "output/q"
 os.makedirs(output_dir, exist_ok=True)
 
 # --- Plotting Setup for Learning Curve ---
