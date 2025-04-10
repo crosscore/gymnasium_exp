@@ -143,6 +143,6 @@ except Exception as e:
 
 # Keep the learning curve plot window open
 print("Close the plot window to exit.")
-plt.show(block=True)
+# plt.show(block=True) # Commented out for batch execution
 
 plt.close() 
